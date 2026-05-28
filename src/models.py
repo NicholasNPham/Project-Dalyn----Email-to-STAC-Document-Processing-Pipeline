@@ -37,3 +37,19 @@ class PDF:
     file_path: str
     ucn: str | None
     extracted_text: str | None
+
+@dataclass
+class ClassificationResult:
+    """
+    Represents the result of classifying a PDF document against the Excel phrase sheet.
+
+    Attributes:
+        document_type: The broad category of the document (e.g. DEMAND, DISCOVERY), or None if unclassified.
+        document_subtype: The specific subcategory of the document, or None if unclassified.
+        score: Confidence score from the phrase matching algorithm.
+        was_priority_override: True if the classification was forced by a priority phrase match.
+    """
+    score: float
+    was_priority_override: bool
+    document_type: str | None
+    document_subtype: str | None
