@@ -49,7 +49,31 @@ class ClassificationResult:
         score: Confidence score from the phrase matching algorithm.
         was_priority_override: True if the classification was forced by a priority phrase match.
     """
-    score: float
-    was_priority_override: bool
-    document_type: str | None
-    document_subtype: str | None
+    document_type: str | None = None
+    document_subtype: str | None = None
+    score: float = 0.0
+    was_priority_override: bool = False
+
+@dataclass
+class Config:
+    """
+    Represents the application configuration loaded from config.yaml at startup.
+
+    Attributes:
+        accounts: List of Outlook email addresses to monitor (e.g. felonypolk@sao10.com).
+        outlook_profile: Name of the Windows Outlook profile used by win32com to open Outlook.
+        folder_completed: Name of the Outlook folder to move successfully processed emails into.
+        folder_manual_review: Name of the Outlook folder to move emails that failed classification into.
+        excel_path: Absolute path to the Excel phrase scoring sheet used by the classifier.
+        log_path: Absolute path to the directory where log files are written.
+        polling_interval_minutes: How often the pipeline checks for new emails, in whole minutes.
+        stac_url: Base URL of the STAC web application used by the Selenium automation.
+    """
+    accounts: list[str]
+    outlook_profile: str
+    folder_completed: str
+    folder_manual_review: str
+    excel_path: str
+    log_path: str
+    polling_interval_minutes: int
+    stac_url: str
