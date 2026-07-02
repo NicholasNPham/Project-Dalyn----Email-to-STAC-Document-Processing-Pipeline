@@ -57,24 +57,38 @@ ProjectDalyn/
 | Excel phrase scoring | `openpyxl` |
 | STAC web automation | `Selenium` |
 | Configuration | `PyYAML` |
+| Testing | `pytest` |
 
 ---
 
 ## Configuration
 
-Copy `config.yaml` and fill in your values:
+Copy `key_template.py` to `key.py` and fill in credentials. Copy `config.yaml` and fill in your values:
 
 ```yaml
 accounts:
   - 'email1'
+  - 'email2'
 
 outlook_profile: "Outlook"
 folder_completed: "Completed"
 folder_manual_review: "Manual Review"
-excel_path: "C:/path/to/phrases.xlsx"
+excel_path: "C:/path/to/DALYN.xlsx"
 log_path: "C:/path/to/ProjectDalyn/logs"
-polling_interval_minutes: 5
+temp_folder: "C:/path/to/ProjectDalyn/temp"
+polling_interval_minutes: 30
 stac_url: "https://your-stac-url.com"
+outlook_retry_attempts: 3
+outlook_retry_delay_seconds: 5
+email_move_error_color: "Red"
+```
+
+---
+
+## Running Tests
+
+```
+pytest tests/
 ```
 
 ---
@@ -85,8 +99,10 @@ stac_url: "https://your-stac-url.com"
 |---|--|
 | `models.py` | Complete |
 | `email_monitor.py` | Complete |
+| `classifier.py` | Complete |
+| `test_classifier.py` | Complete |
 | `ocr.py` | Not started |
-| `classifier.py` | In progress |
+| `test_ocr.py` | Not started |
 | `stac.py` | Not started |
 | `file_manager.py` | Not started |
 | `logger.py` | Not started |
